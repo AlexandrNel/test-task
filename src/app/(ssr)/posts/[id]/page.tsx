@@ -23,7 +23,7 @@ export default async function Page({
   const id = (await params).id;
   const post = await getPostById(id);
   return (
-    <div className="container">
+    <div>
       <h1 className="text-lg font-bold">{capitalizeFirstLetter(post.title)}</h1>
       <p>{capitalizeFirstLetter(post.body)}</p>
     </div>
