@@ -1,0 +1,29 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & > label {
+    margin-bottom: 6px;
+    font-size: 16px;
+    color: #000000a6;
+    font-weight: 500;
+  }
+}
+.input {
+  border: 1px solid black;
+  padding: 10px 6px;
+  border-radius: 4px;
+  line-height: normal;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+  &::placeholder {
+    font-size: 14px;
+  }
+  &[type="file"] {
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
