@@ -5,9 +5,12 @@ export function useModal(): [
   handler: { open: () => void; close: () => void },
 ] {
   const [isOpen, setIsOpen] = React.useState(false);
-  const modalHandler = {
-    open: () => setIsOpen(true),
-    close: () => setIsOpen(false),
-  };
-  return [isOpen, modalHandler];
+  const modalHandler = React.useMemo(
+    () => ({
+      open: () => setIsOpen(true),
+      close: () => setIsOpen(false),
+    }),
+    [],
+  );
+  return [isOpen, modalHandler] as const;
 }
