@@ -1,15 +1,19 @@
 import { cn } from "@/shared/lib/utils";
-import type React from "react";
-import type { ButtonHTMLAttributes } from "react";
+import Link from "next/link";
+import React from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
 type ButtonType = ButtonHTMLAttributes<HTMLButtonElement>;
-
-interface Props extends ButtonType {
+type AnchorType = AnchorHTMLAttributes<HTMLAnchorElement>;
+type DefaultType = {
   className?: string;
   children?: React.ReactNode;
   size?: keyof typeof sizes;
   variant?: keyof typeof variants;
-}
+  element?: "button" | "Link" | "a";
+};
+
+type Props = ButtonType & DefaultType & AnchorType;
 
 const sizes = {
   sm: "px-4 py-1 text-sm",
@@ -23,7 +27,7 @@ const variants = {
 };
 
 const base =
-  "flex items-center justify-center cursor-pointer rounded-md transition-all duration-200 disabled:pointer-events-none disabled:opacity-50";
+  "flex items-center justify-center cursor-pointer rounded-md  duration-200 disabled:pointer-events-none disabled:opacity-50";
 
 export const Button: React.FC<Props> = ({
   className,
@@ -31,15 +35,30 @@ export const Button: React.FC<Props> = ({
   type = "button",
   size = "md",
   variant = "primary",
+  element = "button",
+  href,
   ...props
 }) => {
   return (
-    <button
-      type={type}
-      {...props}
-      className={cn(sizes[size], variants[variant], base, className)}
-    >
-      {children}
-    </button>
+    <React.Fragment>
+      {element === "button" ? (
+        <button
+          type={type}
+          className={cn(sizes[size], variants[variant], base, className)}
+          {...props}
+        >
+          {children}
+        </button>
+      ) : (
+        <Link
+          href={href ?? "/"}
+          type={type}
+          className={cn(sizes[size], variants[variant], base, className)}
+          {...props}
+        >
+          {children}{" "}
+        </Link>
+      )}
+    </React.Fragment>
   );
 };
