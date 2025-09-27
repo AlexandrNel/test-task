@@ -21,8 +21,9 @@ const MODAL_CONTAINER_ID = "modal-container";
 
 export function Modal({ children, isOpen, onClose }: Props) {
   React.useEffect(() => {
+    const hasScroll = document.body.clientHeight > window.innerHeight;
     if (isOpen) {
-      document.body.style = "overflow: hidden; padding-right: 14px;";
+      document.body.style = `overflow: hidden; ${hasScroll ? "padding-right:14px;" : ""}`;
     } else {
       document.body.style = "";
     }
