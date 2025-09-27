@@ -1,31 +1,18 @@
 "use server";
 
-import { API_URL } from "@/shared/lib/consts";
-import { revalidatePath } from "next/cache";
+import type { NewPost, Post } from "@/entities/post";
+import { axios } from "@/shared/api/axios";
+import { createAction } from "@/shared/lib/utils/createAction";
 
-export async function createPost(_: unknown, formData: FormData) {
-  const title = formData.get("title");
-  const body = formData.get("content");
-  const file = formData.get("file") as File;
+const createPostApi = async (post: NewPost) => {
+  const res = await axios.post<Post>(`posts`, post);
+  return res.data;
+};
 
-  const post = { title, body };
-  const res = await fetch(`${API_URL}/posts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(post),
-  });
-  if (!res.ok)
-    return { status: "error", message: "Ошибка при отправке данных" };
-  const data = await res.json();
-  revalidatePath("/posts");
-  return {
-    status: "success",
-    message: "Данные успешно отправлены",
-    data: {
-      ...data,
-      file: { name: file.name, data: file },
-    },
-  };
-}
+export const createPost = createAction<NewPost, Post>(
+  createPostApi,
+  { error: "Ошибка при создании поста", success: "Пост успешно создан" },
+  "title",
+  "body",
+  "file",
+);
