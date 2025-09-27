@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { type Post, PostCard, getPosts } from "@/entities/post/";
 import { CreatePostButton } from "@/features/post";
+import { Suspense } from "react";
+import Loading from "./loadingUi";
 
 export const metadata = {
   title: "Посты",
@@ -8,22 +10,30 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const data: Post[] = await getPosts();
   return (
     <>
       <h1 className="text-lg font-bold">Посты</h1>
       <div>
         <CreatePostButton />
       </div>
-      <ul className="py-4 flex flex-col gap-2">
-        {data.slice(0, 10).map((post) => (
-          <li key={post.id}>
-            <Link href={`/posts/${post.id}`}>
-              <PostCard post={post} />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <Suspense fallback={<Loading />}>
+        <PostList />
+      </Suspense>
     </>
+  );
+}
+
+async function PostList() {
+  const data: Post[] = await getPosts();
+  return (
+    <ul className="py-4 flex flex-col gap-2">
+      {data.slice(0, 10).map((post) => (
+        <li key={post.id}>
+          <Link href={`/posts/${post.id}`}>
+            <PostCard post={post} />
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
