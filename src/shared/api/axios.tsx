@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const BASE_API = process.env.PUBLIC_API_URL;
+import { API_URL } from "../lib/consts";
 
 const instance = axios.create({
-  baseURL: BASE_API,
+  baseURL: API_URL,
 });
 
-export default instance;
+export { instance as axios };
