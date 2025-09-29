@@ -1,11 +1,11 @@
-export interface Post {
+export interface Todo {
   userId: number;
   id: number;
   title: string;
-  body: string;
+  completed: boolean;
 }
 
-export interface NewPost {
+export interface NewTodo {
   title: string;
-  body: string;
+  completed: boolean;
 }

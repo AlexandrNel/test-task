@@ -1,5 +1,6 @@
-export { getPostById } from "./api/getPostById";
-export { getPosts } from "./api/getPosts";
-export { PostCard } from "./ui/PostCard";
-export { PostPage } from "./ui/PostPage";
-export type { Post, NewPost } from "./types";
+export { getTodoById } from "./api/getTodoById";
+export { getTodos } from "./api/getTodos";
+export { addTodo } from "./api/addTodo";
+export { updateTodo } from "./api/updateTodo";
+export { TodoCard } from "./ui/PostCard";
+export type { Todo, NewTodo } from "./types";
