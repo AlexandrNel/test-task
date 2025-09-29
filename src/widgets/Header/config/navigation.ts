@@ -8,7 +8,7 @@ export const navigation = [
     title: "Пользователи",
   },
   {
-    to: "/todo",
+    to: "/todos",
     title: "Задачи",
   },
   {
