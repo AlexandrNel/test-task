@@ -12,7 +12,7 @@ interface Props {
 
 export const CreatePostForm: React.FC<Props> = ({ handler }) => {
   const [state, action, pending] = useActionState(createPost, null);
-  useToastWithActionState<typeof state>(state, handler);
+  useToastWithActionState(state, handler);
 
   return (
     <form action={action}>

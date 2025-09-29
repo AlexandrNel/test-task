@@ -99,14 +99,43 @@ const ModalL = ({
     <div
       id="modal"
       ref={containerRef}
-      className="fixed left-0 top-0 z-[998] h-screen w-full flex items-center justify-center backdrop-blur-[3px] backdrop-brightness-60"
+      className="fixed left-0 top-0 z-[998] h-screen w-full flex items-center justify-center  animate-overlay"
     >
+      <style>
+        {`
+        .animate-enter{
+            animation: animate-enter .2s ease-in-out forwards;
+        }
+        .animate-overlay{
+            animation: overlay .2s ease-in-out forwards;
+        }
+        @keyframes overlay {
+          from {
+            backdrop-filter: blur(0px) brightness(100%);
+          }
+          to {
+            backdrop-filter: blur(3px) brightness(60%);
+          }
+        }
+
+        @keyframes animate-enter {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+      }
+  `}
+      </style>
       <div
         id="modal"
         aria-description="modal"
         className={cn(
           className,
-          "relative p-5 z-[999] rounded-[10px] w-[500px]  bg-white",
+          "relative p-5 z-[999] rounded-[10px] w-[500px]  bg-white animate-enter",
         )}
       >
         <button
