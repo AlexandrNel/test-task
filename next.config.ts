@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       fullUrl: true,
     },
   },
+  images: {
+    remotePatterns: [new URL("https://boringapi.com/**")],
+  },
 };
 
 export default nextConfig;
