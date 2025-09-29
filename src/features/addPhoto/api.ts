@@ -1,8 +1,5 @@
-export const addPhotoApi = async (body: unknown) => {
-  const res = await fetch("http://localhost:3000/api/photos", {
-    method: "POST",
-    body: JSON.stringify(body),
-  });
-  const data = await res.json();
-  return data;
+import type { NewPhoto } from "@/entities/photo";
+
+export const addPhotoApi = async (body: NewPhoto) => {
+  return new Promise((res: (val: NewPhoto) => void) => res(body));
 };

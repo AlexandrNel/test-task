@@ -1,6 +1,6 @@
 import type { User } from "@/entities/user/";
 import { getUsers, UserCard } from "@/entities/user";
-import { AddUserButton } from "@/features/user";
+import { AddUserButton } from "@/features/addUser";
 
 export const metadata = {
   title: "Пользователи",
@@ -14,7 +14,7 @@ export default async function Page() {
       <div className="pb-4">
         <AddUserButton />
       </div>
-      <ul className=" grid grid-cols-3 gap-2">
+      <ul className=" grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2">
         {data.slice(0, 10).map((user) => (
           <li key={user.id}>
             <UserCard user={user} />

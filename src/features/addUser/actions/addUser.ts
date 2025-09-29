@@ -9,7 +9,6 @@ export async function addUser(_: unknown, formData: FormData) {
   const username = formData.get("username");
   const email = formData.get("email");
   const file = formData.get("file") as File;
-
   const user = { name, email, username };
   const res = await fetch(`${API_URL}/users`, {
     method: "POST",

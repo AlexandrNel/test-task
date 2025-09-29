@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { type Post, PostCard, getPosts } from "@/entities/post/";
-import { CreatePostButton } from "@/features/post";
+import { CreatePostButton } from "@/features/addPost";
 import { Suspense } from "react";
 import Loading from "./loadingUi";
 

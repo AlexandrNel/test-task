@@ -14,7 +14,7 @@ export const Header: React.FC<Props> = ({ className }) => {
   const pathname = usePathname();
 
   return (
-    <div className={cn(className, "shadow p-2 mb-3")}>
+    <div className={cn(className, "shadow p-2")}>
       <ul className={clsx("font-medium text-[18px] flex justify-center")}>
         {navigation.map((n) => {
           return (

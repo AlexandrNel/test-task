@@ -41,3 +41,9 @@ export type PhotosDto = {
   total_pages: number;
   photos: PhotoDto["photo"][];
 };
+
+export type NewPhoto = {
+  title: string;
+  description: string;
+  file: File;
+};

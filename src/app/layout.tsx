@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow flex flex-col h-full">{children}</main>
         <ToastContainer />
       </body>
     </html>

@@ -4,6 +4,7 @@ import { Input } from "@/shared/ui/Input";
 import React, { useActionState } from "react";
 import { addUser } from "../actions/addUser";
 import { toast } from "react-toastify";
+import { useForm } from "@/shared/lib/hooks/useForm";
 interface Props {
   className?: string;
   handler?: () => void;
@@ -11,6 +12,7 @@ interface Props {
 
 export const AddUserForm: React.FC<Props> = ({ handler }) => {
   const [state, action, pending] = useActionState(addUser, null);
+  const [error, { handleSubmit }] = useForm();
   React.useEffect(() => {
     if (state?.status === "error") {
       toast.error(state.message);
@@ -25,13 +27,15 @@ export const AddUserForm: React.FC<Props> = ({ handler }) => {
     }
   }, [state, handler]);
   return (
-    <form action={action}>
+    <form action={action} onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
         <Input required placeholder="Имя" name="name" type="text" />
         <Input required placeholder="Username" name="username" type="text" />
         <Input required placeholder="Email" name="email" type="email" />
         <Input name="file" type="file" />
-        {state?.message ? <p>{state.message}</p> : null}
+        {state?.message || error ? (
+          <p className="text-red-500 text-sm">{state?.message || error}</p>
+        ) : null}
         <Button disabled={pending} type="submit">
           {pending ? "Отправка.." : "Отправить"}
         </Button>

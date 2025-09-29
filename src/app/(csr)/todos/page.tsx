@@ -18,11 +18,20 @@ import { toast } from "react-toastify";
 export default function TodoPage() {
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const [isOpen, handler] = useModal();
+  const [isPending, setIsPending] = React.useState(true);
+  const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    getTodos().then((data) => {
-      setTodos(data);
-    });
+    getTodos()
+      .then((data) => {
+        setTodos(data);
+      })
+      .catch((e) => {
+        setError(e.message);
+      })
+      .finally(() => {
+        setIsPending(false);
+      });
   }, []);
   return (
     <>
@@ -45,11 +54,15 @@ export default function TodoPage() {
             +
           </button>
         </li>
-        {todos.slice(0, 10).map((t) => (
-          <li key={t.id}>
-            <TodoCard todo={t} />
-          </li>
-        ))}
+        {isPending
+          ? "Загрузка..."
+          : error
+            ? "Ошибка"
+            : todos.slice(0, 10).map((t) => (
+                <li key={t.id}>
+                  <TodoCard todo={t} />
+                </li>
+              ))}
       </ul>
     </>
   );

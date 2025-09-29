@@ -41,9 +41,7 @@ export const TodoCard: React.FC<Props> = ({ className, todo }) => {
         "border border-gray-200 hover:border-gray-500 p-4 h-full rounded-md flex items-center gap-5 justify-between",
       )}
     >
-      <h2 className="text-lg font-bold w-full">
-        <input className="w-full text-wrap text-ellipsis" value={todo.title} />
-      </h2>
+      <h2 className="text-lg font-bold w-full">{todo.title}</h2>
       <input
         name="complited"
         disabled={isPending}

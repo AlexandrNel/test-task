@@ -1,10 +1,7 @@
 import { revalidatePath } from "next/cache";
 
-export type InputWithFile<T> = T & { file: File };
-export type OutputWithFile<T> = T & { file?: { name: string; file: File } };
-
 export function createAction<Input, Output>(
-  fetcher: (input: Input) => Promise<OutputWithFile<Output>>,
+  fetcher: (input: Input) => Promise<Output>,
   options: { error: string; success: string; revalidate?: string },
   ...fields: string[]
 ) {
